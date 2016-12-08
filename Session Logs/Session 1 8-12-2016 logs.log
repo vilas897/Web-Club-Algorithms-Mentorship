@@ -1,0 +1,155 @@
+[13:42] <@vilas_m> Hey Guys. So we'll start now.
+[13:43] <@vilas_m> Today's session will be on basics of the competitive programming platform and an introduction to STL functions. 
+[13:43] <@vilas_m> So, did you guys try the problems posted on the group? 
+[13:44] <Sai> Few of them
+[13:45] <@vilas_m> Others? 
+[13:45] <Ashwin> nope
+[13:46] <Pratik> I too solved some of them
+[13:46] <Rohan_> I tried some problems
+[13:46] <@vilas_m> It's fine. But try to finish them soon and ping us if you have some trouble :) 
+[13:47] <@vilas_m> When you are coding on competitive programming platforms, one thing to realise is that - the inputs and outputs are dealt with in seperate files. 
+[13:48] <@vilas_m> What I mean to say is, the input is read from the stdin file and the output is written stdout file by default.
+[13:48] <@vilas_m> This gives us a really good advantage. Can anyone guess what it is?
+[13:49] <Sai> If we give all the input at once but the processing takes time... The input can be stacked
+[13:50] <@vilas_m> Yea, so basically let's say in a problem, there are several input test cases. Your code will look something like 
+[13:50] <@vilas_m> cin>>T; while(T--) { //your code }
+[13:50] <@vilas_m> So here in this case, you can print the output required immediately after it is calculated for a given test case. You need not wait to read all input to print the output. 
+[13:51] <@vilas_m> Next
+[13:51] <@vilas_m> I have seen many of my batchmates do this :P Do not print redundant text such as "Enter the number of test cases", "Enter the input", "The output is:" and so on. 
+[13:52] <@vilas_m> Your output file will be compared with the correct answer output file character by character. So printing such statements will cause a wrong answer.
+[13:53] <@vilas_m> The running time of your codes is also really important.
+[13:53] <@vilas_m> Typically, you will get TLE - Time limit exceeded if your code run time is over a few seconds (the limit varies according to the website/problem)  
+[13:53] <ankit_> and language 
+[13:54] <@vilas_m> So you have to be careful and make sure the algorithms you use are efficient. 
+[13:54] <@vilas_m> What language do you guys code in? 
+[13:54] <Pratik> mostly C or C++
+[13:54] <Ashwin_> same here
+[13:55] <Sai> c++ or python
+[13:55] <Rohan_> I know c
+[13:55] <@vilas_m> Others? 
+[13:55] <@vilas_m> The run time and time limit for each question depends on the language as well.
+[13:56] <@vilas_m> For example, as Python, Java codes are much slower than C, time limit for Python is set five times higher than C/C++, and for Java, it is twice as that of C/C++.
+[13:56] <@vilas_m> Even though this relaxation is provided, it usually isn't enough to compensate for the slower languages. So it's better to use C/C++.
+[13:57] <@vilas_m> If you guys are working on C++ (which should be preferred over C. We shall see later why), try to replace all cin/cout statements with the corresponding printf/scanf statements as the latter is much faster
+[13:58] <@vilas_m> Any doubts so far? 
+[13:58] <Sai> no
+[13:59] <Rohan_> No
+[13:59] <ankit_> about the scanning part, it will be faster if you make your own custom scanner based on getchar_unlocked 
+[14:00] <Pratik> No
+[14:00] <Ashwin_> No doubts
+[14:01] <@vilas_m> Next, data types.
+[14:01] <@vilas_m> It's always better to declare integers as long long int, floating point numbers as long double etc in case the range of input ( typically, the range of input will be available in the question ) is quite large
+[14:02] <@vilas_m> The range of int is around 10^9 while the range of long long int is around 10^18
+[14:03] <@vilas_m> Changing int to long or long long int will not affect the run time of your code much, so there is no harm in doing so if you are unsure whether you need long long int or not. 
+[14:03] <@vilas_m> Whenever you declare arrays of large size, say around 10^5 or so, make it a point to declare them globally. 
+[14:04] <@vilas_m> Else, it will cause segmentation faults.
+[14:04] <@vilas_m> Even while declaring them globally, make sure the size does not exceed 10^7.
+[14:04] <@vilas_m> If you need an array of size more than that, than it probably means you will need a better algorithm. 
+[14:05] <@vilas_m> Now, coming to the run time of your code.
+[14:05] <@vilas_m> Typically in C/C++, approximately 4 * (10 ^ 8 ) operations can run in 1 sec. 
+[14:06] <@vilas_m> The time limit and the input size of the problem will give you an idea of the complexity of the algorithm required 
+[14:06] <@vilas_m> For example, if the input size range is <= 10^4 for a time limit of 1 sec, it probably means an O(n^2) solution is required.
+[14:07] <@vilas_m> Now here is another trick to use while coding online.
+[14:07] <Ashwin_> what's "O(n^2) solution"
+[14:08] <@vilas_m> Big-oh notation as we call it, gives an idea of the run time of an algorithm in terms of the input size
+[14:09] <@vilas_m> So, O(n) implies, the code will run in about n steps, where n is the size of the input
+[14:09] <@vilas_m> for example, say you have a single for loop from 1 to n, where n is the size of the input array. 
+[14:10] <@vilas_m> This runs in O(n) time
+[14:10] <@vilas_m> Similarly, a nested for loop
+[14:11] <@vilas_m> for(i=0; i<n; i++) { for(j=0; j<n; j++) { // code } } runs in N*N steps, correct? 
+[14:11] <Ashwin_> right
+[14:11] <Pratik> Can you give an example for input size and time limit for O(log(n)) or O(nlog(n)) solution?
+[14:12] <@vilas_m> Lets take the for loop, for(i=1; i<N; i*=2) { code } 
+[14:12] <@vilas_m> Can anyone point out why the above for loop runs in O(log N) ? 
+[14:13] <Sai> first loop it will run n times
+[14:13] <Ashwin_> The variable i runs as 1,2,4,... 2^n
+[14:13] <Sai> then it will run for n/2 times
+[14:13] <Sai> ans so on..
+[14:13] <Sai> and*
+[14:14] <@vilas_m> There is only 1 for loop there, @Sai :) 
+[14:14] <Sai> ohh sorry 
+[14:14] <@vilas_m> So like all problems :P, let's say the code runs in x steps. 
+[14:15] <@vilas_m> At the beginning of the xth step, what is the value of i? 
+[14:15] <Ashwin_> 2^x
+[14:15] <@vilas_m> Exactly! :)
+[14:16] <@vilas_m> So, 2^x < N. Hence, x < log N ( to base 2 ), correct? 
+[14:17] <Pratik> Yeah
+[14:17] <Sai> yeah
+[14:17] <Ashwin_> I was closer [19:43] <Ashwin_> The variable i runs as 1,2,4,... 2^n  :)
+[14:17] <@vilas_m> So, we can tell the worst case time complexity is O(log N) 
+[14:18] <@vilas_m> Any doubts so far? 
+[14:18] <Sai> No
+[14:19] <Ashwin_> no
+[14:19] <Pratik> NO
+[14:20] <Rohan_> No
+[14:20] <@vilas_m> Next 
+[14:20] <@vilas_m> Due to the limited time available during contests, it is a pain to identify and type all header files required in your program.
+[14:21] <@vilas_m> Instead of doing that, include a single header file called bits/stdc++.h in your programs (for C++ only). 
+[14:21] <@vilas_m> This header file includes every other header file in the C++ standard library and thus, there is no need to include any more header files.
+[14:22] <Ashwin_> Doesn't that affect time complexity?
+[14:23] <@vilas_m> No. The compile time of the program will be affected a bit due to this, but run time will not be affected. 
+[14:23] <@vilas_m> Only the run time will be considered on Online Judges 
+[14:24] <Ashwin_> Ok got it
+[14:24] <@vilas_m> So now we come to STL :D 
+[14:24] <@vilas_m> One of the main reasons why C++ is preferred over C in competitive programming.
+[14:25] <@vilas_m> Does anybody know what it stands for? 
+[14:25] <Ashwin_> STereoLithography?
+[14:26] <@vilas_m> Haha, not really ;) It stands for Standard Template Library
+[14:26] <Ashwin_> xD
+[14:27] <@vilas_m> Why do we use it? So that we can spend more time trying to devise a logic to solve a question than wasting much time for the implementation.
+[14:27] <@vilas_m> STL provides ready-made functions and containers which makes our code look neat
+[14:28] <@vilas_m> What sorting and searching techniques are you guys aware of? 
+[14:29] <Pratik> bubble sort, selection sort, quick sort and mergesort
+[14:29] <Sai> Linear and Binary search
+[14:29] <Ashwin_> bubble,selection; binary
+[14:29] <Sai> I don't know quick sort though
+[14:30] <tushaar> Bubble, Selection, Merge, Insertion, Quick, Heap and Shell; Binary, Linear
+[14:30] <Rohan_> Bubble,selection, binary
+[14:31] <@vilas_m> Can you guys point out the time complexity for all of them?  
+[14:32] <tushaar> Bubble - n*2 = Selection = Insertion; Quick = n*2 (Worst) = nlgn (Best and Avg); Merge - nlgn; Shell - n*2
+[14:32] <tushaar> Heap - nlgn
+[14:33] <tushaar> Binary - lg n (For sorted array only); linear - n
+[14:33] <@vilas_m> Awesome tushaar :) So we ll not go into the depths of deriving the complexity for all of these, but do remember them. 
+[14:33] <Ashwin_> ok
+[14:34] <@vilas_m> Instead of implementing an entire sort function while coding in online contests, You could just use sort(a,a+n) to sort the array a of n elements in the ascending order. 
+[14:34] <@vilas_m> This function has an optimal run time ( O(n log n) ) as well.
+[14:34] <tushaar> Which inturn uses which sort?
+[14:34] <@vilas_m> And also, we can use this function to sort a part of the array. sort(a+i, a+j) sorts the elements of the array from index i to j-1.
+[14:35] <@vilas_m> To use such functions, include the header file algorithms.h (Ofcourse, if you have included bits/stdc++.h already, that would do) 
+[14:36] <@vilas_m> Similarly, for searching
+[14:36] <@vilas_m> find(a,a+n,key) - linear search for key in the range a[0] to a[n-1]
+[14:36] <@vilas_m> binary_search(a,a+n,key) - binary search for key in the range a[0] to a[n-1]. Note that the array should be sorted in this case
+[14:36] <Ashwin_> cool
+[14:37] <@vilas_m> (You can change the indices as per your requirement. Note that) 
+[14:37] <@vilas_m> With the same parameters as the sort function, we also have lower_bound and upper_bound
+[14:38] <@vilas_m> *search function 
+[14:38] <@vilas_m> lower_bound - element greater than or equal to
+[14:38] <@vilas_m> upper_bound - element strictly greater than the key
+[14:39] <@vilas_m> Similarly we have other useful functions as well
+[14:39] <Ashwin_> Are these functions or parameters "lower_bound and upper_bound"?
+[14:39] <@vilas_m> Functions
+[14:40] <@vilas_m> lower_bound(a, a+n, key) 
+[14:40] <Ashwin_> What do they return?
+[14:40] <Ashwin_> Oh got it
+[14:40] <@vilas_m> Say a list has 1 2 3 4 5. And you pass the key as 2. lower_bound returns 2. upper_bound returns 3
+[14:40] <@vilas_m> min(a,b) - returns minimum of a and b. max(a,b) - returns maximum of a and b
+[14:41] <@vilas_m> Similarly for arrays, we have min_element(a,a+n) - returns minimum of all the elements in the range a[0] to a[n-1]
+[14:41] <@vilas_m> In the same way, max_element
+[14:42] <@vilas_m> reverse(a,a+n) reverses the array
+[14:42] <@vilas_m> swap(a,b) swaps the values of a and b
+[14:42] <@vilas_m> So those are some of the most basic functions which we ll need
+[14:43] <@vilas_m> You can use this reference to read more about them: http://www.cplusplus.com/reference/algorithm/
+[14:43] <@vilas_m> You conveniently change parameters so that it matches your requirement :) 
+[14:43] <@vilas_m> Any doubts so far? 
+[14:43] <tushaar> Hey, is it better to stick to #include<algorithm> or #include<bits/stdc++.h>?
+[14:44] <tushaar> In competitive programming I mean.
+[14:45] <@vilas_m> The latter. It saves time in writing code or figuring out which header files we need :P For example, we might also need - stack.h, queue.h, limits.h etc. Its painful to think of what we need right?
+[14:46] <@vilas_m> It wont affect your run time. So use it without any worries :D 
+[14:46] <Ashwin_> Are all this components of STL?
+[14:46] <@vilas_m> Yes
+[14:47] <Ashwin_> cool
+[14:47] <@vilas_m> So i guess that's it for today. Next session, we ll be looking into STL containers and basic number theory required for competitive coding. 
+[14:48] <@vilas_m> Make sure you finish the problems posted on the group as soon as possible. Ping us anytime for help! :) 
+[14:48] <Ashwin_> Great!
+[14:49] <Sai> Sure!
+[14:49] <Rohan_> Sure
