@@ -1,0 +1,172 @@
+Session Start: Mon Dec 12 11:45:31 2016
+Session Ident: #wcalgo4
+01[13:40] <@vilas_m> Today we will cover STL containers and if time permits, get started with a bit of number theory required for competitive coding
+01[13:40] <@vilas_m> Can someone point out what is a container, first of all?
+01[13:41] <@vilas_m> Ok, so in simple terms, something which can hold data is called a container
+01[13:42] <@vilas_m> First we shall deal with vectors
+01[13:42] <@vilas_m> Vectors are very similar to arrays, except that they can change their size at any time. 
+01[13:42] <@vilas_m> To use them, insert #include<vector> in your code 
+01[13:42] <@vilas_m> Or if you're using bits/stdc++.h already, then thats fine too
+01[13:43] <@vilas_m> We define a vector like this: vector<vector_type> var_name; 
+01[13:43] <@vilas_m> So if we want a vector named 'v' with integer elements, we write vector<int> v; 
+01[13:43] <@vilas_m> Inserting an element: to insert an element (say 'x') into the vector, we write v.push_back(x)
+01[13:43] <@vilas_m> This writes the element 'x' at the end of the vector
+01[13:44] <@vilas_m> How do we know the size of a vector? 
+01[13:44] <@vilas_m> We use the function size(). So if we want to know the size of the vector v, we can write int count = v.size()
+01[13:44] <@vilas_m> Be careful not to write statements like vector<int> v[10] when you need a vector of size 10. 
+01[13:45] <@vilas_m> The above statement actually initialises 10 seperate vectors instead of a single vector of size 10. 
+01[13:45] <@vilas_m> To change the size of a vector, we can use the resize() function.
+01[13:45] <@vilas_m> So to declare a vector of size 10, we can write 2 statements: vector<int> v; v.resize(10);
+[13:45] <Pratik> What will be the names of those 10 vectors? All v?
+01[13:46] <@vilas_m> Yea. Sort of. The different vectors can be accessed by using the vector index. So for the 1st vector, we write v[0] 
+01[13:46] <@vilas_m> Something similar to 2D arrays 
+[13:47] <Pratik> All right
+01[13:47] <@vilas_m> The size of a vector can be changed at any time using the resize function.
+01[13:47] <@vilas_m> Note that you do not need to use the resize function at all.
+01[13:47] <@vilas_m>  When you use the push_back()/insert() function, the vector automatically increases the size of the vector as and when it is required.
+01[13:48] <@vilas_m> Accessing elements in a vector works in the same way as arrays.
+01[13:48] <@vilas_m> To access say the 10th element of a vector, we can just write v[9] 
+01[13:48] <@vilas_m> Does anyone know what are iterators? 
+[13:49] <Sai_> Difference between push_back() and insert()?
+01[13:49] <@vilas_m> Come on guys :P Guess something atleast
+01[13:49] <@vilas_m> @Sai, i will come to insert() function soon
+[13:50] <Sai_> okk
+01[13:50] <@vilas_m> So basically iterators help you in traversing a given container (in this case, a vector)
+[13:50] <Pratik> Iterators are the variables we use to run through an array or vector?
+01[13:50] <@vilas_m> Yes! @Pratik :) 
+[13:50] <tushaar_> Yeah that
+01[13:51] <@vilas_m> We can declare an iterator for any container as follows: 
+01[13:51] <@vilas_m> container_type :: iterator i;
+01[13:51] <@vilas_m> So for vector, we can write vector<int>::iterator i 
+01[13:51] <@vilas_m> There are default iterators in vectors which return the address of the starting element (v.begin()) and end of the vector ( v.end() )
+01[13:52] <@vilas_m> Note that v.end() does not give the address of the last element present in the vector.
+01[13:52] <@vilas_m> It returns the address past the last element.
+01[13:52] <@vilas_m> So if we want the last element in the vector, we can use the address (v.end() - 1)
+[13:52] <tushaar_> Can we not use: for(int i = v[0]; i < v[n]; i++); What is the advantage of iterators over this?
+[13:53] <tushaar_> i mean 0 -> n
+01[13:54] <@vilas_m> What if the size of the vector is unknown? We need to write an additional statement there. And itertors give the address of a particular element in a vector
+[13:54] <tushaar_> Oh Okay!
+01[13:55] <@vilas_m> So lets say you have a particular address of an element in the vector. Instead of traversing the whole vector to find it's index, we can directly access that element with the iterator 
+01[13:55] <@vilas_m> If we want to print all elements in a vector, we can write
+01[13:55] <@vilas_m> vector<int> :: iterator i; 
+01[13:56] <@vilas_m> for( i = v.begin() ; i! = v.end(); i++) { printf("%d", *i); // or cout<<*i; } 
+[13:57] <ashwin> so iterator is a pointer
+01[13:57] <@vilas_m> @Sai, Can you write a statement that sorts a given vector? (Use the STL function discussed in the last session)
+01[13:57] <@vilas_m> Yes, Ashwin
+[13:57] <Sai_> Yes
+[13:58] <Sai_> sort(v.begin(), v.end()-1)
+[13:58] <Sai_> I dont remember the symtax properly 
+[13:59] <tushaar_> int count = v.size();
+[13:59] <Sai_> syntax*
+[13:59] <tushaar_> sort(v, v+count) ?
+[13:59] <tushaar_> Would that work?
+01[13:59] <@vilas_m> great @Sai! A slight correction though. sort(v.begin(), v.end()) without the -1.  
+[14:00] <Sai_> Oh ok
+01[14:00] <@vilas_m> Yes tushaar, you can also write sort(v.begin(), v.begin() + count) 
+[14:00] <tushaar_> Thanks
+01[14:00] <@vilas_m> We also have a function called insert to insert at any given position in a vector
+01[14:00] <@vilas_m> Let's say the vector v contains 1, 2, 4 and I want to insert data 3 at position 2 (ie after element 2) 
+01[14:01] <@vilas_m> I can just write v.insert(v.begin() + 2, 3);
+01[14:01] <@vilas_m> The vector now contains 1, 2, 3, 4
+01[14:01] <@vilas_m> any doubts so far?
+[14:02] <Sai_> No
+[14:02] <Pratik> NO
+[14:02] <ashwin> nope
+[14:03] <tushaar_> None
+01[14:03] <@vilas_m> Make sure you do not make the mistake anywhere while using the sort() function. If the array A has N elements from index 0 to N-1, we write sort(A, A+N) and not sort(A, A+N-1)   
+01[14:03] <@vilas_m> Next we come to pairs. 
+01[14:04] <@vilas_m> Pairs are basically a pair of 2 (not neccessarily of the same type) elements.
+01[14:04] <@vilas_m> Say we need to pair 2 elements, one integer and one character. 
+01[14:04] <@vilas_m> We can write pair<int, char> p; 
+01[14:04] <@vilas_m> To access the 1st element, i.e the integer, we can write p.first and to access the character, we write p.second
+01[14:04] <@vilas_m> We can initialise the values in 2 ways: 
+01[14:04] <@vilas_m> 1) pair<int, char> p(2, 'A');
+01[14:05] <@vilas_m> 2) pair<int, char> p; p.first = 1; p.second = 'A';
+01[14:05] <@vilas_m> If you are familiar with C++ classes, then maybe you can note here that the 1st element uses the default constructor.  
+01[14:06] <@vilas_m> 1st method*
+01[14:06] <@vilas_m> @shamitha, Can you write a statement that declares a vector whose type is a pair of 2 integers?
+[14:07] <shamitha> vector<pair<int,int>> v;
+01[14:08] <@vilas_m> Right! :) 
+01[14:08] <@vilas_m> Now we also have a make_pair function to make a pair out of 2 available variables.
+01[14:08] <@vilas_m> Say we have int x = 20, y = 30; 
+01[14:08] <@vilas_m> We can make a pair out of x and y as follows:
+01[14:08] <@vilas_m> pair<int, int> p; p = make_pair(x, y);
+01[14:09] <@vilas_m> Next, we come to strings.
+01[14:09] <@vilas_m> So instead of using an array of characters, we can the default string containers 
+01[14:09] <@vilas_m> To declare a string we write string s; 
+01[14:10] <@vilas_m> For length of a string: s.length()
+01[14:10] <@vilas_m> To say get a substring from a given string, we use the substr() function. 
+01[14:10] <@vilas_m> Say string s = "Webclub";
+01[14:10] <@vilas_m> Then we write string s1 = s.substr(0, 3), s2 = s.substr(3, 7);
+01[14:10] <@vilas_m> s1 will now contain "Web" and s2 will contain "club"
+01[14:11] <@vilas_m> There are lot of functions that perform string manipulations in the header file string.h which you might have learnt last year. So let's skip it for now. 
+01[14:12] <@vilas_m> Any doubts so far?
+[14:12] <Sai_> Nope
+[14:12] <Pratik> No
+[14:13] <ashwin> cool
+01[14:13] <@vilas_m> Next comes Maps. Maps basically maps data with our desired key values.
+01[14:13] <@vilas_m> For example, in arrays, we used A[1] to access the element with index 1. 1 is the key value here
+01[14:14] <@vilas_m> What if we dont want the key value to be integers?
+01[14:14] <@vilas_m> Say we want to map names to roll no's
+01[14:14] <@vilas_m> We will see an example. 
+01[14:14] <@vilas_m> map<string, int> m; 
+01[14:14] <@vilas_m> m["Tushaar"] = 20;
+01[14:14] <@vilas_m> m["Saikiran"] = 23; 
+01[14:15] <@vilas_m> So basically we can map any data type to any other data type. 
+01[14:15] <@vilas_m> The elements in maps are stored in the sorted order of their key value. 
+01[14:15] <@vilas_m> Just like how index 0 is stored before index 1 in arrays, Saikiran's Roll No. will be stored before Tushaar's. (As S<T)
+01[14:16] <@vilas_m> Like vectors, the default iterators begin() and end() are applicable here as well.
+01[14:16] <@vilas_m> To traverse all elements in a map we can write
+01[14:16] <@vilas_m> for(map<string,int> :: iterator it= m.begin(); it!=m.end(); it++)
+01[14:17] <@vilas_m>  { cout<<(*it).first << (*it).second; }
+01[14:17] <@vilas_m> (*it).first and second corresponds to the key value and data respectively
+01[14:17] <@vilas_m> Note that instead of using the dot operator in (*it).first, we can also write it->first i.e the arrow operator for pointers
+01[14:18] <@vilas_m> @Pratik, Can you tell a method to store names and marks in several subjects of many students?
+[14:19] <Pratik> We can use a vector of maps or a vector of pairs
+01[14:20] <@vilas_m> Yup! So @Tushaar, can you declare a container that does the job? 
+01[14:20] <@vilas_m> Write the statement
+[14:20] <tushaar__> vector<map<string, int>> v
+[14:21] <tushaar__> vector<pair<int, int>> v
+01[14:22] <@vilas_m> A slightly better method would be declaring a map of string, vector<int>. i.e, map< string, vector<int> >
+01[14:22] <@vilas_m> Now we come to sets
+01[14:22] <@vilas_m> Like the sets we have in maths, we cannot have duplicate elements in a set.
+01[14:23] <@vilas_m> The elements in a set cannot be accessed by a particular index (As they are always stored in a sorted order).
+01[14:23] <@vilas_m> We can declare a set by writing set<data_type> s; 
+01[14:23] <@vilas_m> And inserting data 'x' into a set: s.insert(x); 
+01[14:23] <@vilas_m> Other syntax like begin(), end(), size() etc are similar to the other containers.
+01[14:24] <@vilas_m> So let's solve a basic question.
+01[14:24] <@vilas_m> Given a list of N elements, count the number of distinct elements in the list. 
+01[14:24] <@vilas_m> Can someone come up with an approach? ;) 
+[14:25] <tushaar__> Insert all elements into a set container and find its size
+[14:25] <Sai_> We can use Maps
+01[14:25] <@vilas_m> Yes! :) 
+01[14:25] <@vilas_m> @Sai, Yup! :D Can you explain how? 
+[14:26] <Sai_> Let say array A has the elements, 
+[14:26] <Sai_> And m is a map
+[14:26] <Sai_> We can iterate m[A[i]]=1
+[14:26] <Sai_> or some constant
+[14:27] <Sai_> ans calculate size of the map
+[14:27] <Sai_> and*
+01[14:27] <@vilas_m> Yea! :)  
+[14:28] <Sai_> If it has 3 'ones', It will go to m[1] itself, everytime
+01[14:28] <@vilas_m> So the map will map integers to integers.  
+01[14:29] <@vilas_m> We are done with STL Containers. 
+01[14:29] <@vilas_m> So, whenever you are coding online from now, try to use them to make your life simpler. 
+01[14:29] <@vilas_m> We'll also share a few questions to be done as assignment on the group later on.
+01[14:29] <@vilas_m> Now, before we conclude, we will see an efficient algorithm to find the GCD of 2 numbers.
+[14:29] <tushaar__> Cool
+01[14:30] <@vilas_m> Can anyone write a basic code to find the GCD of 2 numbers say a and b? 
+01[14:31] <@vilas_m> ?
+[14:32] <tushaar__> if(a == 0) then return b; else return gcd(b%a, a);
+01[14:33] <@vilas_m> Haha, Ok so you wrote it using the euclid's algorithm :P I wanted a basic code. Anyway, 
+01[14:33] <@vilas_m> So Euclid's algorithm says GCD of 2 numbers A and B, GCD(A,B) = GCD(B%A, A) 
+01[14:34] <@vilas_m> We can use this recursively, like in the code written by Tushaar, to find GCD of any 2 numbers A and B in O(log(max(A,B))) time
+[14:35] <tushaar__> How?
+[14:35] <tushaar__> O(log(max(a,b))
+01[14:36] <@vilas_m> The derivation is pretty tricky :P Even I am not so sure myself on how to put it in proper equations. 
+01[14:36] <@vilas_m> But
+01[14:37] <@vilas_m> We can think of it like this - Every time, we have B%A to be a number smaller than A (property of mod), it takes approximately log(A) time to reach 0.  
+01[14:38] <@vilas_m> I'll look into it and get back to you 
+[14:38] <tushaar__> Sure thanks
+01[14:39] <@vilas_m> So with that, we conclude today's session. Next session will cover more aspects with respect to the number theory required for Competitive Coding. 
+Session Close: Mon Dec 12 14:40:32 2016
