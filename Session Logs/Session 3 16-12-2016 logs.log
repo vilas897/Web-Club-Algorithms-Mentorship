@@ -1,0 +1,243 @@
+﻿
+Session Start: Fri Dec 16 12:42:39 2016
+Session Ident: #wcalgo4
+[13:37] <mukta> I am Mukta, 3rd year IT and we will look into some basic number theory related concepts today
+[13:38] <mukta> The most important of these is modular arithmetic... the % operator
+[13:38] <mukta> so there are some properties of these 
+[13:38] <mukta> (a+b)%c = (a%c+b%c )%c
+[13:39] <mukta> here a, b and c are the variable holding numbers
+[13:39] <mukta> the same property works with -,* and / operations as well
+[13:40] <mukta> now, in programming questions have you observed certain question saying express answers as 10^9 modulo 7
+[13:40] <mukta> anyone?
+[13:41] <tushaar_> Yup.
+[13:41] <mukta> why is that ?
+[13:41] <tushaar_> If we have very large answers.
+[13:41] <mukta> exactly
+[13:42] <mukta> when the answer cannot be stored in any available datatype
+[13:42] <mukta> let's take an example..you have to compute x^n where x is finite and n is a very large number
+[13:43] <mukta> what would be the naive approach?
+[13:43] <tushaar_> Compute x^n.
+[13:44] <tushaar_> As it is, right?
+[13:44] <mukta> also can anyone tell me the complexity 
+[13:45] <salman> for loop, O(n) time complexity?
+[13:45] <salman> Assuming it can't be calculated directly!
+[13:45] <tushaar_> x^n = x^(n-1) * X
+[13:45] <mukta> well yes
+[13:46] <salman> x^n = x^(n-1) * X <- This would give O(n) as well I believe!
+[13:46] <mukta> you can reduce this by using exponentiation
+[13:47] <mukta> say you have to write a funtion to compute 3^10
+[13:47] <mukta> what you could do is instead of 10 iterations 
+[13:47] <tushaar_> can we do it as, n/2 and n/2?
+[13:47] <mukta> write 3^10 as (3^2)^5
+[13:48] <mukta> so you reduce the number index of the exponent
+[13:49] <mukta> this is reduced by half while 3^2 is just 1 more computation
+[13:49] <mukta> so overall
+[13:49] <mukta> When  n n is odd, try and convert it into an even value.  x n xn can be written as  x ⋅ x n − 1 x⋅xn−1. This ensures that  n − 1 n−1 is even.  If  n n is even, replace  x n xn by  ( x 2 ) n / 2 (x2)n/2. If  n n is odd, replace  x n xn by  x ⋅ x n − 1 x⋅xn−1.  n − 1 n−1 becomes even and you can apply the relevant formula.
+[13:50] <mukta> sorry for the wierd notations...the underscores went missing
+[13:50] <mukta> are things clear untill now?
+[13:51] <salman> yeah
+[13:52] <mukta> http://ideone.com/V03ALw
+[13:52] <salman> Oh the time complexity wiuld be O(logn) fr this approach right?
+[13:52] <mukta> look into this code. The funcion for binary exponentiation
+[13:53] <mukta> yes,that's right salman
+[13:53] <salman> would be**
+[13:53] <mukta> now what if n is very large such that you cannot store the value of x^n
+[13:54] <mukta> you will have to make use of modular arithmetic
+[13:54] <mukta> can anyone figure out what change you can make to the code I sent so that you can do so
+[13:54] <mukta> tushar?..
+[13:55] <mukta> salman..
+[13:55] <tushaar_> Yeah.
+[13:55] <mukta> the rest of you guys please respond
+[13:55] <salman> Hold on!
+[13:55] <tushaar_> One approach would be: temp = x ^ (y/2).
+[13:56] <tushaar_> If even: temp * temp.
+[13:56] <tushaar_> If odd: x * temp * temp.
+[13:56] <mukta> wait how would that work...
+[13:57] <tushaar_> Or recursively: binaryExponentaion (x, y/2)
+[13:57] <mukta> no, let me explain
+[13:57] <salman> I'm assuming we'll have to store it
+[13:57] <salman> In a string
+[13:57] <tushaar_> binaryExponentation(int x, int n)
+[13:57] <mukta> well that's a possiblity salman
+[13:57] <Ashwin> We'll use modular function
+[13:58] <mukta> that's precise ashwin
+[13:58] <tushaar_> temp = binaryExponentation(x, n/2)
+[13:58] <mukta> return modularExponentiation((x*x)%M,n/2,M) if even
+[13:59] <mukta> return (x*modularExponentiation((x*x)%M,(n-1)/2,M))%M if odd 
+[13:59] <mukta> tushar your approach would not take care of values that are beyond the storable limit
+[13:59] <tushaar_> Oh okay.
+01[13:59] <@vilas_m> @salman, If we have say n!, where n is say around 10^6, we cannot store it in a string as well since it is huge. We will need to calculate ( n! ) mod M and then store it. 
+[14:00] <salman> I'm sorry I did not understand this function modularExponentiation
+[14:00] <salman> the function**
+[14:00] <mukta> sure..i will elaborate
+[14:01] <mukta> http://ideone.com/WrAN0i
+[14:02] <tushaar_> We are just doing %M, so that it fits in our range, right?
+[14:02] <mukta> yes
+[14:03] <mukta> In some languages the answer will exceed the range of the datatype while in other languages it will timeout due to large number multiplications. In such instances, you must use modulus (%). Instead of finding  x^n, you must find (x^n) %  m.
+[14:04] <mukta> For example, run the implementation of the method to find  2 10 9 2109. The  O ( n ) O(n) solution will timeout, while the  O ( l o g N ) O(logN) solution will run in time but it will produce garbage values.  To fix this you must use the modulo operation i.e. %  M in those lines where a temporary answer is computed.
+[14:04] <tushaar_> But mukta, what if I want 10^9 (=x) power 10 (=n)?
+[14:04] <tushaar_> Say, M = 10^9.
+[14:04] <mukta> * (2^10)^9=2109
+[14:04] <salman> Why is there a %M outside for the odd case but not for the even case, @mukta?
+[14:05] <salman> outside the bracket**
+[14:06] <mukta> well coz in odd you take 1 number outside..like say 9^5 is 9.9^4  
+[14:06] <mukta> but that's not the case for an even power
+[14:07] <salman> Ahh I see! Very well, I did understand it.
+[14:07] <mukta> I didn't get your question @salman 
+[14:07] <mukta> sorry tushar
+01[14:07] <@vilas_m> Wherever there is a multiplication symbol, there should be a %M corresponding to it basically
+[14:08] <salman> Makes sense, @vilas!
+[14:08] <mukta> I will handle it separately, ping me after the session @tushar
+[14:08] <mukta> I will move forward
+[14:08] <mukta> Is that okay?
+[14:08] <tushaar_> Cool @Mukta.
+[14:09] <Ashwin> One doubt.
+[14:09] <mukta> so next is the Chinese remainder theorem
+[14:09] <mukta> go ahead
+[14:09] <Ashwin> -,* and / operations replace + in the property right?
+[14:09] <Ashwin> The very first one
+[14:09] <mukta> yes
+[14:09] <Ashwin> Cool.
+[14:09] <mukta> Find a number which when divided by 2 leaves remainder 1, when divided by 3 leaves remainder 2, when divided by 7 leaves remainder 5" etc can be reformulated into a system of linear congruences and then can be solved using Chinese Remainder theorem.
+[14:10] <mukta> the above problem can be expressed as a system of three linear congruences: "x ≡ 1 (mod 2), x ≡ 2 mod(3), x ≡ 5 mod (7)
+[14:10] <mukta> In general, a system of linear congruences:
+[14:11] <mukta> x ≡ a1 (mod n1) x ≡ a2 (mod n2) x ≡ a3 (mod n3) .... x ≡ ak (mod nk)
+[14:11] <mukta> where (ni,nj) = 1 for every ni != nj has a unique solution modulo n where n = n1n2n3...nk.
+[14:12] <Ashwin> What does  (ni,nj) = 1 mean?
+[14:12] <mukta> oh sorry
+[14:13] <mukta> in number theory (a,b) corresponds to gcd of a and b
+[14:13] <mukta> [a,b] corresponds to LCM of a and b
+[14:13] <mukta> Is the hypothesis clear to everyone
+[14:13] <Pavana_> Yes
+[14:14] <Pratik> Yeah
+[14:14] <salman> yes
+[14:14] <Rohan__> Yes
+[14:14] <Sai_> Yes
+[14:14] <tushaar_> Yup.
+[14:14] <mukta> shamitha lokaksha?
+[14:14] <shamitha> yes
+[14:14] <Ashwin> The last step is bit in unclear
+[14:14] <Ashwin> *typo
+[14:15] <mukta> should I explain @ashwin?
+[14:15] <Ashwin> Yea
+[14:16] <mukta> okay.. so it says that in a system of linear congruences if every pair of numbers n_i and n_j are coprime
+[14:17] <mukta> where n_i n_j ... and so on are the numbers mentioned in the problem that divide the required number
+[14:18] <Ashwin> Ok
+[14:18] <mukta> there will be a unique solution mod n to the problem where n will the lcm of all such numbers 
+[14:18] <Ashwin> Cool
+[14:19] <mukta> how many of you are familiar with seive of eratostenes?
+[14:19] <mukta> *Eratosthenes?
+[14:20] <tushaar_> Me.
+[14:20] <tushaar_> For finding if a number is prime, right?
+[14:20] <mukta> yes!
+[14:21] <mukta> what is the complexity of finding prime numbers upto say a number n? 
+[14:21] <mukta> the naive approach
+[14:21] <tushaar_> sqrt(n).
+[14:21] <tushaar_> Sorry, O(n).
+[14:22] <salman> O(n) I believe
+[14:23] <mukta> that's to check if a number is prime right
+[14:23] <tushaar_> Yeah.
+[14:23] <Ashwin> O(sqrt(n))
+[14:23] <mukta> that's right ashwin
+[14:24] <mukta> you do not have to iterate beyond the root of n
+[14:24] <mukta> so let's move to the seive algorithm
+[14:25] <mukta> say you have to find all primes upto a number n
+[14:25] <mukta> The basic idea behind the Sieve of Eratosthenes is that at each iteration one prime number is picked up and all its multiples are eliminated. After the elimination process is complete, all the unmarked numbers that remain are prime.
+[14:25] <mukta> initially all the numbers upto n are stored and marked as prime
+[14:26] <mukta> then you iterate from number 2
+[14:26] <mukta>  the algorithm : Mark all the numbers as prime numbers except 1 Traverse over each prime numbers smaller than sqrt(N) For each prime number, mark its multiples as composite numbers Numbers, which are not the multiples of any number, will remain marked as prime number and others will change to composite numbers.
+[14:26] <Ashwin> Oh..
+[14:27] <mukta> for complexity : If i = 2, inner loop runs N / 2 times. If i = 3, inner loop runs N / 3 times. If i = 5, inner loop runs N / 5 times
+[14:27] <mukta> are you guys understanding?
+[14:28] <Sai_> Yes
+[14:28] <tushaar_> Yeah.
+[14:28] <mukta> so what would the complexity be?
+[14:28] <Pratik> Yes
+[14:28] <Pavana_> Yes
+[14:28] <Lokaksha> Yes
+[14:29] <salman> yeah
+[14:29] <Lokaksha> Yes
+[14:29] <mukta> complexity anyone?
+[14:30] <Ashwin> O(N/n) ?
+[14:30] <Sai_> O(sqrt(n)*log(n)) ?
+[14:30] <mukta> N * (½ + ⅓ + ⅕ + … ) = O(NloglogN)
+[14:30] <salman> O(n * log(log(n))).
+[14:31] <mukta> that's perfect salman!
+[14:31] <salman> Though I never understood the proof!
+[14:31] <tushaar_> log(log N))?
+[14:32] <mukta> Vilas looked into the euclidean approach to obtaining GCD in the last session
+[14:32] <tushaar_> Yes.
+[14:33] <mukta> there is an extension to it
+[14:34] <mukta> G C D ( A , B ) has a special property so that it can always be represented in the form of an equation i.e.  Ax+By=GCD(A,B).
+[14:35] <mukta> This algorithm takes two inputs as A and B and returns  GCD(A,B) and coefficients of the above equation x y as output.
+[14:36] <mukta> Just for theory sake it is called Bezout's identity
+[14:36] <mukta> this is put to use in multiplicative inverse
+[14:38] <mukta> If A.B=1, you are required to find B such that it satisfies the equation. The solution is simple. The value of B is 1/A or  A − 1. Here, B is the multiplicative inverse of A.
+[14:39] <mukta> now modular multiplicative inverse is : If you have two numbers A and M, you are required to find B such it that satisfies the following equation:  ( A . B ) % M = 1
+[14:39] <mukta> get it?
+[14:39] <mukta> Here B is the modular multiplicative inverse of A under modulo M.
+[14:40] <mukta> please respond..
+[14:40] <salman> I'm sorry no!
+[14:40] <Ashwin> Fine
+[14:40] <salman> I couldn't get the part from %M
+[14:40] <tushaar_> Yes.\
+[14:40] <mukta> @salman is the identity okay?
+[14:40] <salman> Yes
+[14:41] <mukta> alright 
+[14:41] <Lokaksha> yes
+[14:41] <mukta> For example, if A=5 and M=12
+[14:41] <mukta>  (A*5)%M = (5*5)%12= 1
+[14:42] <mukta> so here,5 is the modular multiplicative inverse of 5 under modulo 12.
+[14:42] <salman> Oh okay!
+[14:42] <salman> Understood :D
+[14:42] <Sai_> Got it!
+[14:43] <mukta> (A*B)%M = (A%M * B%M)%M...that's the basis
+[14:43] <mukta> so now, the inverse must be in the range [1,M-1].
+[14:44] <mukta> coz B can't be greater than M...as B%M is being calculated
+[14:44] <mukta> also an inverse exists only when A and M are coprime
+[14:45] <mukta> to give an example when a=5 and m=12
+[14:45] <mukta> b=17 also gives the required answer 
+[14:45] <mukta> however b cannot be the inverse as then b>m 
+[14:46] <mukta> hence b=5 is the answer 
+[14:46] <mukta> now the naive approach to this would be  : 
+[14:46] <mukta> int modInverse(int A,int M) {     A=A%M;     for(int B=1;B<M;B++)         if((A*B)%M)==1)             return B; }
+[14:47] <mukta> understand?
+[14:47] <tushaar_> Yeah.
+[14:47] <mukta> complexity is simple O(n)
+[14:47] <Sai_> Yeah
+[14:48] <mukta> an alternative to this approach would be using the extended euclid method..the identity mentioned above
+[14:50] <mukta> A and M are coprime i.e.  A x + M y = 1 Ax+My=1. In the extended Euclidean algorithm, x is the modular multiplicative inverse of A under modulo M. Therefore, the answer is x. You can use the extended Euclidean algorithm to find the multiplicative inverse.
+[14:51] <mukta> I will not be getting into the proofs ....the hypothesis enough for now
+[14:51] <mukta> you can look into the wiki pages if you want to get into the depth of it and ping any of us incase of doubts 
+[14:52] <mukta> suppose if A=5 and M=12
+[14:52] <mukta> 5 ∗ ( 5 ) + 12 ∗ ( − 2 ) = 1 (which comes from the extended Euclidean algorithm). Therefore, 5 is the inverse of A=5 under modulo 12.
+[14:53] <mukta> get the example?
+[14:53] <Ashwin> Yup
+[14:53] <Lokaksha> Yes
+[14:53] <Pavana_> Yes
+[14:53] <Rohan__> Yes
+[14:54] <tushaar_> Yeah, but in some cases the choice of Y may lead to different answers with X < M.
+[14:54] <tushaar_> Right?
+[14:55] <mukta> well I am not sure of that...I think the identity gives a unique answer
+[14:55] <mukta> I am not sure on that ...will look into it and let you know
+[14:55] <tushaar_> Thanks.
+[14:56] <mukta> cool
+[14:56] <mukta> that's all that I would be covering for today
+[14:57] <mukta> This is brief overview, so do look into some tutorials online so that you understand things in depth
+[14:57] <salman> Any sums we can try out?
+[14:57] <salman> Based on today?
+[14:58] <mukta> yes ofcourse
+[14:58] <mukta> https://www.hackerearth.com/practice/math/number-theory/basic-number-theory-2/practice-problems/algorithm/sum-of-primes-7/  https://www.hackerearth.com/practice/math/number-theory/basic-number-theory-2/practice-problems/algorithm/ashu-and-prime-factors-4/  https://www.hackerrank.com/challenges/sherlock-and-gcd  https://www.hackerrank.com/challenges/dance-class  https://www.hackerearth.com/practice/math/number-theory/basic-number-theo
+[14:58] <Ashwin> What's the ans for that Chinese remainder theorem prob :P
+[14:59] <mukta> do try these...the mainly use modular arithmetic.... M value is usually 10^9+7 
+[14:59] <mukta> answer as in?
+[14:59] <salman> Looks enough! :p
+[14:59] <Ashwin> x = mod n is the unique solution
+[14:59] <Ashwin> As it said
+[15:00] <Ashwin> Whats the ans for example you mentioned above that
+[15:01] <Ashwin> Just to clarify 
+[15:02] <tushaar_> 42, right?
+[15:04] <tushaar_> Sorry, x = mod 42.
+[15:06] <mukta> well yes...
+[15:06] <mukta> you must use th extended euclidean algo beyond that for solving...
+[15:07] <mukta> I will send some tutorial on that.. I myself have never used it :P
