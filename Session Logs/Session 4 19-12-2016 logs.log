@@ -1,0 +1,173 @@
+﻿[13:40] <@vilas_m> The topic for today is DP - Short for Dynamic Programming. 
+[13:40] <@vilas_m> So, let's discuss a problem
+[13:40] <@vilas_m> Given that the nth fibonacci number is the nth term of the series 0,1,1,2,3,5,8.. and so on, calculate the nth fibonacci number
+[13:40] <@vilas_m> There is no formula to calculate the nth fibonacci number by substituting the value of n directly (Ofcourse there are random approximation theories involved with the golden ratio, but let's keep that discussion on hold :P) 
+[13:41] <@vilas_m> But, we know that the nth term = sum of (n-1)th and (n-2)th term. 
+[13:41] <@vilas_m> Approach 1:
+[13:41] <@vilas_m> The basic code could be a recursive function
+[13:41] <@vilas_m> int fib(int n)
+[13:41] <@vilas_m> { if(n == 1)
+[13:41] <@vilas_m>   return 0;
+[13:41] <@vilas_m>   if(n==2)
+[13:41] <@vilas_m>   return 1;
+[13:41] <@vilas_m>   return fib(n-1) + fib (n-2); 
+[13:41] <@vilas_m> } 
+[13:42] <@vilas_m> So we have broken up a larger problem of finding the nth fibonacci number to 2 smaller sub problems of finding the n-1 th  and n-2 th fibonacci number
+[13:42] <@vilas_m> Now lets analyse this. Take Fib(5) for example. 
+[13:43] <@vilas_m> fib(5) calls fib(4) and fib(3). fib(4) calls fib(3) and fib(2). fib(3) calls fib(1) and fib(2).
+[13:43] <@vilas_m> We can represent this in the form of a tree. 
+[13:43] <@vilas_m> Something similar to this: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Fibonacci_Tree_5.svg/372px-Fibonacci_Tree_5.svg.png
+[13:44] <@vilas_m> The time complexity for this recursion will be O(2^n), as there will be approx 2^n function calls in the tree. 
+[13:44] <@vilas_m> (Strictly, it's the (golden ratio)^n, but let's not go deeper into the complexity analysis. You can google it for more info) 
+[13:45] <@vilas_m> Here you can notice that, fib(3) is called twice. Once while computing fib(5) and once while computing fib(4). 
+[13:45] <@vilas_m> And as we aren't storing this value anywhere, fib(3) will be computed twice which is a redundancy. 
+[13:45] <@vilas_m> What do we do to reduce this compleixity? 
+[13:46] <@vilas_m> Enter - dynamic programming :D 
+[13:46] <@vilas_m> Dynamic Programming is basically a fancy way to tell - Store computed values to be used later on.
+[13:46] <@vilas_m> So, we will store whatever we calculate in an array (Let us take an array with 1 as the start index)
+[13:47] <@vilas_m> Approach 2:
+[13:47] <@vilas_m> fib[1] = 0;
+[13:47] <@vilas_m> fib[2] = 1;
+[13:47] <@vilas_m> for i=2 to N 
+[13:47] <@vilas_m> fib[i] = fib[i-1] + fib[i-2]
+[13:47] <@vilas_m> The answer required is fib[N]
+[13:47] <@vilas_m> Now analysing this, we can see that the complexity is O(N). 
+[13:48] <@vilas_m> Because fib[i-1] and fib[i-2] are already calculated before fib[i] in each iteration. 
+[13:48] <@vilas_m> The number of instructions executed is therefore in the range of N as opposed to the 2^n in approach 1.
+[13:48] <@vilas_m> Any doubts so far? 
+[13:49] <Sai_> No
+[13:49] <Pavana> No
+[13:49] <Ashwin_> Nope
+[13:50] <@vilas_m> Now notice one more difference in Approaches 1 and 2. In approach 1, we divide the problem of finding fib(N) into 2 parts
+[13:50] <Pratik> No
+[13:50] <@vilas_m> Finding fib(n-1) and fib(n-2), which in turn keep dividing themselves until n=1 or n=2
+[13:50] <@vilas_m> This is called Top - Down Recursive approach 
+[13:51] <@vilas_m> In approach 2, first we solve the smaller problems of N= 1, 2, 3 and so on until we reach our largest problem, n
+[13:51] <@vilas_m> This is called Bottom - Up Memoization approach 
+[13:51] <@vilas_m> Now let's take a minute to respect Approach 2 and acknowledge that approach 2 is much more superior as compared to approach 1 :P
+[13:51] <@vilas_m> Say N = 40. A small number. 
+[13:52] <@vilas_m> Approach 1 runs in O(2^40) = 0(10^12 ( approx ) ) time. That takes more than 1000 seconds to execute in C. 
+[13:52] <@vilas_m> Approach 2 runs in O(40) time. That's about one-millionth of a second.
+[13:52] <@vilas_m> See the difference?
+[13:53] <@vilas_m> (Similar is the optimisation in scaling down problems from O(N) to O(log N) or say O(N^2) to O(N log N) btw)
+[13:53] <@vilas_m> We aren't done with fibonacci yet :P 
+[13:53] <@vilas_m> Now, let's consider this. 
+[13:54] <@vilas_m> The problem has several test cases. Say test case 1 is N = 9 and test case 2 is N = 10. 
+[13:54] <@vilas_m> Test case 1 is solved using approach 2 let's say. 
+[13:54] <@vilas_m> The array is now holding values from fib[1] to fib[9].
+[13:55] <@vilas_m> But for test case 2, the for loop will run again to calculate fib[1] to fib[9] even though it's actually stored while solving test case 1.
+[13:55] <@vilas_m> Redundancy right?
+[13:55] <Ashwin_> Yup
+[13:55] <@vilas_m> Enter - Approach 3 
+[13:55] <@vilas_m> The Top Down - Recursion with Memoization approach :D 
+[13:56] <@vilas_m> Whenever fib(x) is called, We will check whether fib(x) is already calculated and stored or not. 
+[13:56] <@vilas_m> If stored, well and good. We ll use it directly
+[13:56] <@vilas_m> If not stored, we shall calculate it, store it for further use and then use it
+[13:57] <@vilas_m> Coming to the implementation
+[13:57] <@vilas_m> First thing to do - Initialise the array fib[ ] with all -1's. -1 value for an index with signify that the value of fib(that index) is not calculated yet.
+[13:57] <@vilas_m> We have a function built in C++ to do the same. 
+[13:57] <@vilas_m> memset(fib, -1, sizeof(fib)); (Google for more info about this function after the session) 
+[13:58] <@vilas_m> Next, we ll combine a few features of approach 1 and 2 to write a function (We'll call it fibo so that we do not confuse it with the array fib)
+[13:58] <@vilas_m> fib[1] = 0; fib[2] = 1;
+[13:58] <@vilas_m> int fibo(int n)
+[13:58] <@vilas_m> { if(fib[n] != -1)
+[13:58] <@vilas_m>   return fib[n];
+[13:58] <@vilas_m>   else
+[13:58] <@vilas_m>   { fib[n] = fibo(n-1) + fibo(n-2);
+[13:58] <@vilas_m>     return fib[n];
+[13:58] <@vilas_m>   }
+[13:58] <@vilas_m> }
+[14:00] <@vilas_m> Notice that there is no redundancy involved in this, as whenever fib of some x is calculated, it is stored then and there itself.
+[14:00] <@vilas_m> The complexity of approach 3 remains O(N), but in competitive coding, with several test cases, the run time will reduce drastically.
+[14:01] <@vilas_m> So, here we have 3 approaches to solve fibonacci series. Approaches 2 and 3 are Dynamic programming approaches.
+[14:01] <@vilas_m> So dynamic programming is basically a way of solving problems by 
+[14:02] <@vilas_m> 1. Breaking larger problems into several smaller sub problems. 
+[14:02] <@vilas_m> 2. Storing the results of smaller sub problems for further use to reduce time complexity
+[14:02] <@vilas_m> In a way, we are trading space for time. 
+[14:02] <@vilas_m> Any doubts? 
+[14:03] <Ashwin_> No
+[14:03] <Pavana> No
+[14:03] <Sai_> No
+[14:03] <@vilas_m> Great. Let's move on. 
+[14:03] <@vilas_m> Lets take one more problem
+[14:04] <Pratik> No
+[14:04] <@vilas_m> Given a sequence of numbers, find the length of the longest increasing sub sequence in a sequence of length N.
+[14:04] <@vilas_m> One of the standard problems which is solved using DP.
+[14:04] <@vilas_m> So let's say we have a sequence 9 1 3 2 4. 
+[14:05] <@vilas_m> Here, 9 1 3, 1 2 4, 3 2 4, 1 2 all are sub sequences. 1 2 3 4 is not a sub sequence. 
+[14:05] <@vilas_m> Basically the indices of the sub sequence elements should be in the ascending order 
+[14:05] <@vilas_m> Increasing sub sequence implies the elements in the sub sequence must be in the ascending order.
+[14:06] <@vilas_m> Can somebody point out what's the LIS in our example? 
+[14:06] <Ashwin> 2 4
+[14:06] <Pratik> 1 2 4
+[14:06] <@vilas_m> Yes @Pratik :) 
+[14:07] <@vilas_m> Sub sequence need not mean that the elements be continuos @Ashwin :D
+[14:07] <Ashwin> Yea got that :P
+[14:07] <@vilas_m> So the larger and main problem here is to find the length LIS for all N elements in the sequence. 
+[14:08] <@vilas_m> length of* 
+[14:08] <@vilas_m> Let us break it down into sub problems. 
+[14:08] <@vilas_m> First let's find the LIS for the sequence which has only the first element, let's call it LIS(1) (And store it in L[1])
+[14:09] <@vilas_m> Then, we shall find the L[2] which is the longest increasing subsequence that includes the 2nd element, and proceed further until we cover all N elements.
+[14:09] <@vilas_m> I ll put the code first and then we can analyse on why it works
+[14:09] <@vilas_m> (Again, to avoid confusion, i ll use a 1-base indexed array. Let us call the sequence as 'A')
+[14:10] <@vilas_m> memset(L, 1, sizeof(L));
+[14:10] <@vilas_m> for(i=1; i<=N; i++)
+[14:10] <@vilas_m> { for(j=1; j<i; j++)
+[14:10] <@vilas_m>   { 
+[14:10] <@vilas_m>      if(A[j] < A[i]) // Less than or less than or equal to depends on whether the subsequence required should be strictly increasing or not 
+[14:10] <@vilas_m>      L[i] = max( L[i] , L[j] + 1);
+[14:10] <@vilas_m>   }  
+[14:10] <@vilas_m> }
+[14:10] <@vilas_m> return (Largest element in L[]);
+[14:10] <@vilas_m> Stare at the code for sometime, take your own examples and see if you can notice how it works
+[14:11] <@vilas_m> Tell me when to proceed
+[14:13] <@vilas_m> I ll proceed? If you guys din't get it, its fine I'll explain
+[14:14] <Sai_> sure
+[14:14] <@vilas_m> Now, analysing step by step. 
+[14:14] <@vilas_m> First we set all the values, L[i] as 1
+[14:14] <@vilas_m> Why? Because whenever we have a sequence, it is possible to have an increasing sub sequence of length 1 by including only the ith element of the sequence.
+[14:15] <@vilas_m> (Remember: L[i] denotes the longest increasing subsequence, that includes the ith element, from the sequence of numbers from index 1 to i) 
+[14:15] <@vilas_m> *length of the longest increasing subsequence
+[14:16] <@vilas_m> Now, we shall assume that we have got the answer for L[1] to L[i-1] and it is stored. 
+[14:16] <@vilas_m> Let us have a loop from 1 to i-1.
+[14:16] <@vilas_m> When we find A[j] such that it is less than A[i], a new LIS can be formed from the LIS(j) (i.e the subsequence which includes the jth element) by adding one element, A[i].
+[14:17] <@vilas_m> But to change the value of L[i], L[j] + 1 must be larger than the previous value of L[i]. Because we might have already found out a subsequence which is larger than this one. 
+[14:17] <@vilas_m> The maximum length is then found by searching for the largest element in the array LIS[ ]. 
+[14:18] <@vilas_m> Note that LIS[N] is not the answer here because the largest increasing sub sequence may or may not include the nth element.  
+[14:18] <@vilas_m> * L[N] sorry
+[14:19] <@vilas_m> Is this clear? Feel free to ask any doubt, whatsoever :) 
+[14:21] <@vilas_m> Yes/No, guys :P 
+[14:21] <Ashwin> This point is unclear   But to change the value of L[i], L[j] + 1 must be larger than the previous value of L[i]. Because we might have already found out a subsequence which is larger than this one.
+[14:22] <@vilas_m> Alright. So look. We keep on checking for values of j between 1 and i-1, whether the element A[j] is less than A[i]. Correct?  
+[14:22] <Ashwin> Yes
+[14:23] <Pratik> Yeah
+[14:23] <@vilas_m> Now say for j = 4, L[j] = 3 and A[j] < A[i]. Say L[i] was 1 before this. 
+[14:23] <@vilas_m> What happens?
+[14:24] <@vilas_m> L[i] will change to 4, i.e L[j] + 1, correct?
+[14:24] <@vilas_m> Meaning we have a sub sequence which includes the jth element as well as the ith element, whose length is 4. 
+[14:25] <Ashwin> Ok
+[14:25] <@vilas_m> Because L[j] = 3 implied there was a sub sequence which includes the jth element whose length is 3. 
+[14:26] <@vilas_m> Just adding 1 element A[i] to the above sub sequence because A[i] is greater than A[j] and the resulting sub sequence will still remain an increasing sub sequence
+[14:27] <@vilas_m> Now agreed that L[i] is stored as 4. The loop goes on. We find another j (Say j= 6) such that A[j] < A[i] and L[j] = 2 lets say.
+[14:28] <Pratik> Yes
+[14:28] <@vilas_m> We can make one more sub sequence which includes the 6th and the ith element, whose length is L[6] + 1, ie 3. Correct? 
+[14:29] <@vilas_m> But can we change the value of L[i] as L[6] + 1. No. Why? Because we already have a bigger sub sequence which could be formed by the answer got from j = 4. 
+[14:30] <@vilas_m> So we check whether the current value held by L[i] is smaller than L[j] + 1. Only then we ll change the value. In other words, set L[i] as the largest among L[i] ie some answer which you got before and L[j] + 1 ie the answer which you are getting from this new j 
+[14:30] <@vilas_m> I hope this helps a bit? :P 
+[14:34] <@vilas_m> Take some examples guys. Say a sequence of length 5 or 6. Write down what happens in the algorithm for that example, and see how it works.
+[14:36] <@vilas_m> ?
+[14:36] <Sai_> Yup
+[14:36] <Sai_> now git it
+[14:36] <Sai_> got*
+[14:37] <Pratik> I think I got it..it's a bit confusing though.
+[14:37] <@vilas_m> Yea. That's fine. Just take a few more examples, and try to visualise :D 
+[14:38] <ankit> What exactly is your confusion
+[14:39] <Pratik> The understanding part was confusing, not the code
+[14:39] <Pratik> Yeah
+[14:40] <ankit> Right now you can visualize it as a lower triangle of a square matrix
+[14:42] <@vilas_m> http://www.geeksforgeeks.org/fundamentals-of-algorithms/ There are loads of other standard algorithms used in Dynamic Programming, out of which some important ones are listed here. It's not something to be taught by a common formula/method as such, so it would be great if you could go through the algos whenever you have time.  
+[14:42] <@vilas_m> As you guys noticed today, the logic applied for fibonacci and LIS problem wasn't really similar. 
+[14:43] <@vilas_m> But the basic concept of DP is common everywhere. Breaking up bigger problems into smaller ones. And storing the results 
+[14:44] <@vilas_m> I'll post a list of problems later on in the group, do try them
+[14:44] <@vilas_m> That's it for today guys
+
