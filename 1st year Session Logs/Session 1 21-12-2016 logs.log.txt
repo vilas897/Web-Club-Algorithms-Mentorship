@@ -1,0 +1,306 @@
+Session Start: Wed Dec 21 12:34:54 2016
+Session Ident: #wcalgo4
+[13:40] <ishaan> Hello! I'm Ishaan. 1st Year Comps
+[13:41] <Ashwin> What's today's session about.? 
+[13:42] <@vilas_m> Hey guys! Sorry for the delay. Was waiting to see if your batchmates are going to join
+[13:42] <ishaan> Competetive coding
+[13:43] <@vilas_m> So, we have a wonderful attendance today I see :P 
+[13:43] <@vilas_m> Are both of you comfortable with C++? 
+[13:43] <ishaan> I am
+[13:43] <Anirudh_> yes
+[13:44] <Ashwin> Yes 
+[13:44] <@vilas_m> Great! :) 
+[13:44] <@vilas_m> So, did you guys try the problems posted on the group? Any issues?
+[13:45] <@vilas_m> Be quick in responding guys. Otherwise, this will get boring :P 
+[13:45] <ishaan> sorry I couldn't try the problems
+[13:45] <Anirudh_> No didnt try
+[13:45] <@vilas_m> Alright. But do try them soon and approach any of the mentors for help :) 
+[13:46] <ishaan> Sure!
+[13:46] <Anirudh_> OK
+[13:46] <@vilas_m> Ok, if you guys have seen the problems, you might have realised that many problems have several test cases for the input. 
+[13:46] <@vilas_m> What do you do for dealing with several test cases? 
+[13:46] <@vilas_m> Simple. Just write 
+[13:46] <@vilas_m> cin>>T; (or scanf("%d", &T); for C users )
+[13:46] <@vilas_m> while(T--)
+[13:46] <@vilas_m> {
+[13:46] <@vilas_m> }
+[13:47] <@vilas_m> Your code goes inside the flower brackets
+[13:47] <ishaan> ok!
+[13:47] <@vilas_m> When you are coding on competitive programming platforms, one thing to realise is that - the inputs and outputs are dealt with in seperate files.
+[13:47] <@vilas_m> What I mean to say is, the input is read from the stdin file and the output is written stdout file by default.
+[13:47] <Ashwin> Ok
+[13:47] <@vilas_m> This gives us a really good advantage. Can anyone guess what it is? 
+[13:48] <ishaan> I don't know :/
+[13:48] <Anirudh_> no idea
+[13:48] <Ashwin> U can manipulate the files separately.? 
+[13:48] <@vilas_m> So basically you can print the output required immediately after it is calculated for a given test case. You need not wait to read all input to print the output. 
+[13:48] <@vilas_m> Have noticed a lot of people storing their outputs for all test cases in an array or something and then printing all of it at once. 
+[13:49] <@vilas_m> Don't do this ^.
+[13:49] <@vilas_m> Just do:
+[13:49] <@vilas_m> cin>>T;
+[13:49] <@vilas_m> while(T--)
+[13:49] <@vilas_m> { -Take the input for the test case
+[13:49] <@vilas_m>   -Do the manipulations
+[13:49] <@vilas_m>   -Print the output
+[13:49] <@vilas_m> }
+[13:49] <ishaan> ohh.. okay
+[13:50] <Anirudh_> okay
+[13:50] <Ashwin> What's wrong if we store the outputs in an array.? 
+[13:50] <@vilas_m> Don't wait for the while loop to end for printing. As soon as you get the answer, print it. 
+[13:50] <ishaan> time consuming?
+[13:51] <@vilas_m> @Ashwin, It's redundant. Why store the output in an array and then print it all at once. 
+[13:51] <@vilas_m> Yes ishaan.
+[13:51] <Ashwin> Ok
+[13:51] <@vilas_m> Next
+[13:51] <ishaan> ok!
+[13:51] <@vilas_m> I have seen many of my batchmates do this and get errors :P
+[13:52] <@vilas_m> Do not print redundant text such as "Enter the number of test cases", "Enter the input", "The output is:" and so on. It'll cause errors.
+[13:52] <ishaan> ohh!!
+[13:52] <@vilas_m> I know that teachers in school/college frown seeing codes without these^ :P But please do not do this in online contests
+[13:52] <@vilas_m> There is no person sitting on the other end of the line who'll get impressed seeing how neat your output looks xD
+[13:52] <Ashwin> Oh!! 
+[13:52] <@vilas_m> Your output file will be compared with the correct answer output file character by character. 
+[13:53] <@vilas_m> The question will specift the pattern of output required, so make sure you follow that pattern strictly
+[13:53] <ishaan> Okay. Will keep that in mind
+[13:53] <@vilas_m> specify* 
+[13:53] <@vilas_m> The running time of your codes is also really important.
+[13:53] <@vilas_m> Typically, you will get TLE - Time limit exceeded if your code run time is over a few seconds (the limit varies according to the website/problem/language used. Generally a few seconds is set as the limit)
+[13:54] <ishaan> okay
+[13:54] <@vilas_m> So you have to be careful and make sure the algorithms you use are efficient. 
+[13:54] <@vilas_m> The run time and time limit for each question depends on the language as well.
+[13:54] <Ashwin> What does run time depend on? 
+[13:54] <@vilas_m> I am coming to that soon Ashwin :) 
+[13:54] <@vilas_m> For example, as Python, Java codes are much slower than C.
+[13:55] <@vilas_m> Time limit for Python is set five times higher than C/C++, and for Java, it is twice as that of C/C++.
+[13:55] <@vilas_m> Even though this relaxation is provided, it usually isn't enough to compensate for the slower languages. So it's better to use C/C++. 
+[13:55] <ishaan> cool
+[13:55] <@vilas_m> Any doubts so far?
+[13:56] <ishaan> no
+[13:56] <Ashwin> Why is the run time for python,  java higher than c/c++? 
+[13:56] <@vilas_m> Python is a bit more abstract. Like - in c++ you specify the type of data like int, float etc right? 
+[13:57] <Ashwin> Yes 
+[13:57] <@vilas_m> In python - You don't specify the type. You can directly use the variables
+[13:58] <@vilas_m> And there are many other things similar to this that makes Python, Java slower.  
+[13:58] <@vilas_m> Basically python is more user-friendly i can say :P 
+[13:58] <@vilas_m> If you guys are working on C++ (which should be preferred over C), you might have heard about how cin/cout statements are much slower than printf/scanf statements.
+[13:59] <@vilas_m> So, you might often see problems statements or websites saying "Use printf/scanf statements instead of cin/cout to make your codes run faster"
+[13:59] <ishaan> Yes. I've heard
+[13:59] <@vilas_m> However, cin/cout statements are actually faster than printf/scanf
+[13:59] <Ashwin> What does declaring/not declaring variable have to do with speed.? 
+[14:01] <Ashwin> What makes cin cout  faster than printf and scanf.? 
+[14:01] <@vilas_m> The compiler has to find out which type the variable is and make sure there is appropriate memory allocated for that. For example - When you say int A[8]; it says by default to the C++ compiler that 8 elements of integer type is going to be used further on, so allocate space for it. 
+[14:01] <@vilas_m> But, this is skipped in Python. Additional time is required for that. 
+[14:02] <@vilas_m> Yea i am coming to that
+[14:02] <Ashwin> Oh! Okay 
+[14:02] <@vilas_m> C++ IO statements are synced with the underlying C library IO statements. 
+[14:02] <Anirudh_> how is cin and cout more faster han printf and scanf
+[14:02] <@vilas_m> This allows you to use cin/cout interchangeably with printf/scanf statements in your code and as a result, makes cin/cout run slower than printf/scanf normally
+[14:03] <@vilas_m> Yea, slow down Anirudh, coming to it xD 
+[14:03] <@vilas_m> However, you can turn this sync off and use only C++ IO statements. 
+[14:03] <@vilas_m> ios::sync_with_stdio(false);
+[14:03] <@vilas_m> Include this as the first statement inside your main function. 
+[14:04] <@vilas_m> As to why cin/cout statements are slower than printf/scanf - See in printf and scanf, you define %d %f etc in the format string right? 
+[14:04] <@vilas_m> *are faster
+[14:05] <Ashwin> Yes 
+[14:05] <ishaan> yes
+[14:05] <@vilas_m> In online contests, your run time is used as the judging parameter. Your compile time is not considered. 
+[14:06] <Ashwin> Oh! Ok
+[14:06] <@vilas_m> In C++, all the type matching is done during compile time. When you write cout<<a; where a is an integer, the compiler knows that a is an integer to be displayed during compile time.
+[14:07] <@vilas_m> However in C, it is done during run time. The format string is evaluated during the run time, so this adds up for the additional time taken by printf/scanf .. 
+[14:07] <@vilas_m> That's why cin/cout is faster. 
+[14:08] <@vilas_m> Next, data types
+[14:08] <@vilas_m> It's always better to declare integers as long long int, floating point numbers as long double etc in case the range of input ( typically, the range of input will be available in the question ) is quite large
+[14:08] <@vilas_m> The range of int is around 10^9 while the range of long long int is around 10^18
+[14:09] <@vilas_m> Changing int to long or long long int will not affect the run time of your code much, so there is no harm in doing so if you are unsure whether you need long long int or not. 
+[14:09] <@vilas_m> Are you guys aware of what is a macro?
+[14:09] <ishaan> no
+[14:09] <Ashwin> No
+[14:10] <@vilas_m> #define ? :P 
+[14:10] <ishaan> yes
+[14:10] <Ashwin> Oh. 
+[14:10] <@vilas_m> Yea so macro is basically defining your own short forms for code. Say you are too lazy to type that extra "long long" for long long int
+[14:10] <@vilas_m> Just add
+[14:10] <@vilas_m> #define ll long long int
+[14:10] <@vilas_m> ^ this statement right after your header file declaration
+[14:11] <ishaan> ok
+[14:11] <@vilas_m> And then use ll throughout the code :) 
+[14:11] <ishaan> cool
+[14:11] <@vilas_m> Or even, say you are too lazy to write for(int i=0; i<N; i++)
+[14:11] <@vilas_m> Just add a line
+[14:11] <@vilas_m> #define rep(i,j,n) for(int i=j;i<n;++i)
+[14:12] <@vilas_m> And use rep(i, 0, N) wherever you need for(int i=0; i<N; i++)
+[14:12] <@vilas_m> You can write a bunch of such macros and save it in a file, and whenever there is an online contest, you could just copy paste these macros onto your code :P
+[14:12] <Ashwin> Awesome 
+[14:13] <@vilas_m> Although, macros are generally considered dangerous if not used properly. So be careful. 
+[14:13] <Ashwin> Dangerous as in.? 
+[14:14] <@vilas_m> Say you write rep(i++, 0, N) instead of rep(i, 0, N) 
+[14:14] <@vilas_m> By mistake
+[14:14] <@vilas_m> Basically you might get confused while using them. Just keep note of that
+[14:15] <ishaan> okay!
+[14:15] <@vilas_m> Any other doubts so far?
+[14:15] <ishaan> nope
+[14:15] <@vilas_m> Whenever you declare arrays of large size, say around 10^5 or so, make it a point to declare them globally. 
+[14:15] <Ashwin> Is it possible to replace whole blocks of code using macros? 
+[14:16] <@vilas_m> Yes Ashwin. But be careful. Test them out before contests to make sure they work.
+[14:17] <ishaan> will the runtime be affected if we use macros?
+[14:17] <@vilas_m> One of my favorite questions :P #define x 5+2 ... and y= x*x*x . What do you think will be the output?
+[14:17] <@vilas_m> No ishaan
+[14:18] <ishaan> ok
+[14:18] <ishaan> 125?
+[14:18] <@vilas_m> No. 
+[14:18] <Ashwin> 27.?
+[14:19] <@vilas_m> Yes Ashwin! :) Excellent!
+[14:19] <Ashwin> No problem :) 
+[14:19] <@vilas_m> Can you explain why?
+[14:20] <Ashwin>  Precedence.  Right? 
+[14:20] <@vilas_m> Yup. Normally you might expect x =7, so y = 7*7*7 = 343. 
+[14:20] <Ashwin> * has higher Precedence than +
+[14:21] <@vilas_m> But it's not. Because #define simply replaces x by 5+2 .. So it's 5 + 2*5 + 2*5 + 2
+[14:21] <@vilas_m> That's why i said #define is sometimes dangerous :P 
+[14:21] <ishaan> ohh! I understood
+[14:21] <@vilas_m> So coming to arrays
+[14:22] <@vilas_m> The variables declared in the main() functions are stored in what's called a program stack. 
+[14:22] <@vilas_m> It's a limited memory which is allocated to the program. 
+[14:22] <@vilas_m> So arrays of size more than say 10^5, need to be declared outside main() as global variabls
+[14:23] <@vilas_m> variables*
+[14:23] <ishaan> ok
+[14:23] <@vilas_m> As all global variables are stored in what's known as a heap. A heap can accomodate much more data than a stack because the size of the heap can keep on increasing until it occupies the entire RAM
+[14:24] <@vilas_m> Even while declaring them globally, make sure the size does not exceed 10^7 though
+[14:24] <Ashwin> Where do we need arrays of such large sizes? 
+[14:24] <@vilas_m> Generally in contests, if you see the problems, they ll give the input range for number of elements to be really huge
+[14:24] <@vilas_m> That's why
+[14:24] <Ashwin> Oh! 
+[14:25] <@vilas_m> I spent half an hour in a contest this year figuring out why i was getting a segmentation fault due to this :P 
+[14:25] <ishaan> ohh!
+[14:25] <@vilas_m> So be careful
+[14:25] <@vilas_m> Next
+[14:25] <Ashwin> What's a segmention fault.? 
+[14:26] <@vilas_m> It's a type of error you get while compiling codes when you mess with the memory. 
+[14:27] <@vilas_m> Say somewhere you want A[-1] or A[100000000000] 
+[14:27] <@vilas_m> Or some random errors while working with pointers
+[14:27] <@vilas_m> Segmentation fault
+[14:27] <Ashwin> How can u declare arrays with negative sizez? What 
+[14:28] <@vilas_m> Exactly. That's an error right? 
+[14:28] <@vilas_m> It's called a segmentation fault
+[14:28] <Ashwin> Oh!  Ok
+[14:28] <@vilas_m> Prefer writing \n instead of using endl while working on online judges
+[14:28] <@vilas_m> Now, when you are writing output to a certain file (stdout in our case), instead of writing data into the output file whenever a cout/printf statement is encountered, what the program does is to store output to be written in what's called a temporary buffer. 
+[14:29] <@vilas_m> When the buffer is full/some function which flushes the buffer is called, it flushes the entire output buffer into the output file. 
+[14:29] <@vilas_m> endl works by first adding a new line to the output buffer followed by flushing the buffer. 
+[14:29] <@vilas_m> '\n' is just a character and simply adds a new line character to the output buffer. 
+[14:29] <Ashwin> What does endl do.? 
+[14:30] <@vilas_m> So, writing \n instead of endl can save a lot of time especially when large number of lines is to be printed for the question
+[14:30] <@vilas_m> Sorry, i dint get your question? :/
+[14:30] <Ashwin> I mean what is endl? 
+[14:31] <@vilas_m> It's a predefined feature in C++
+[14:31] <@vilas_m> It just adds a new line
+[14:31] <@vilas_m> cout<<"Hello World!"<<endl; 
+[14:31] <Ashwin> Ok
+[14:31] <@vilas_m> Never used it in +2? :/ 
+[14:32] <Ashwin> Never used it
+[14:32] <@vilas_m> Anyway, so, writing \n instead of endl can save a lot of time especially when large number of lines is to be printed for the question
+[14:32] <@vilas_m> Next. 
+[14:32] <@vilas_m> Due to the limited time available during contests, it is a pain to identify and type all header files required in your program.
+[14:33] <@vilas_m> Instead of doing that, include a single header file called bits/stdc++.h in your programs (for C++ only). 
+[14:33] <@vilas_m> This header file includes every other header file in the C++ standard library and thus, there is no need to include any more header files.
+[14:33] <@vilas_m> The compile time of the program will be affected a bit due to this, but run time will not be affected. 
+[14:33] <@vilas_m> So there's no harm in using bits/stdc++.h at all
+[14:34] <@vilas_m> Although, let me warn you - Do not use it in college in any programming labs :P 
+[14:34] <Ashwin> What about c.? 
+[14:34] <@vilas_m> There is no equivalent header file in C 
+[14:34] <Ashwin> Oh
+[14:35] <@vilas_m> Especially in the comps dept :P Don't use this. IT Dept allows it I heard, but not sure.
+[14:35] <@vilas_m> mukta ?
+[14:36] <@vilas_m> Ok, so there's a little bit about time complexity remaining. Shall we continue or stop here?
+[14:36] <mukta> IT dept doesn't really bother
+[14:37] <@vilas_m> Oh lol
+[14:37] <@vilas_m> Guys? Shall we continue with time complexity? 
+[14:37] <Ashwin> So why  does comp dept get bothered with it.? 
+[14:38] <@vilas_m> I have no clue man xD They feel it's some sort of cheating
+[14:38] <ishaan> yeah. continue
+[14:38] <Ashwin> Yeah 
+[14:39] <Anirudh_> yeah
+[14:39] <@vilas_m> Alright. So typically in C/C++, approximately 4 * (10 ^ 8 ) operations can run in 1 sec. 
+[14:39] <@vilas_m> The time limit and the input size of the problem will give you an idea of the complexity of the algorithm required (I'll explain what is complexity in a second, wait)
+[14:39] <@vilas_m> For example, if the input size range is <= 10^4 for a time limit of 1 sec, it probably means an O(n^2) solution is required. 
+[14:39] <@vilas_m> So, what is this O( ) something i wrote? Big-oh notation as we call it, gives an idea of the run time of an algorithm in terms of the input size
+[14:40] <@vilas_m> So, O(n) implies, the code will run in about n step
+[14:40] <@vilas_m> steps*
+[14:40] <@vilas_m> for example, say you have a single for loop from 1 to n (which isn't nested basically). This runs in O(n) time
+[14:41] <@vilas_m> Similarly, a nested for loop
+[14:41] <@vilas_m> for(i=0; i<n; i++) 
+[14:41] <@vilas_m> { for(j=0; j<n; j++) 
+[14:41] <@vilas_m>   { (code) } 
+[14:41] <@vilas_m> }
+[14:41] <@vilas_m> The above code runs in O(N^2) time. 
+[14:41] <@vilas_m> Because there are N^2 iterations in total over here 
+[14:42] <ishaan> oh! Okay
+[14:42] <Ashwin> Bit confusing 
+[14:42] <@vilas_m> @Ashwin, which part?
+[14:43] <Ashwin> What is Big oh.? 
+[14:43] <@vilas_m> I wrote O(N) right? This is the big - oh notation. O(N) is read as Big - oh of N 
+[14:43] <@vilas_m> Just a name
+[14:43] <Ashwin> What does it have to do with run time? 
+[14:44] <@vilas_m> Let's say a single iteration in the for(i=0; i<N; i++) runs in unit time. How much time will it take to finish all iterations? 
+[14:45] <@vilas_m> N right?
+[14:45] <Ashwin> Yes of course 
+[14:46] <@vilas_m> Exactly. The unit time which i said over here depends on the system you are using. A super computer will obviously be faster than a normal computer. 
+[14:46] <@vilas_m> So to avoid telling the run time in seconds, microseconds, etc, we just tell it runs in O(N) time
+[14:46] <ishaan> ok!
+[14:47] <@vilas_m> Ashwin? Is that clear? 
+[14:47] <@vilas_m> I'm defining the run time for only the for loop as O(N) and not for the entire program
+[14:48] <Ashwin> Yes crystal clear:) 
+[14:48] <@vilas_m> Alright :D 
+[14:48] <@vilas_m> Consider this loop -
+[14:48] <@vilas_m> for(i=0; i<N; i+=2)
+[14:48] <@vilas_m> You might say this runs in O(N/2) time. But you can strike off the 2 there and simply say O(N) time. Big-oh notation is basically an approximation. 
+[14:49] <@vilas_m> That's how big oh is defined. 
+[14:49] <@vilas_m> So basically you can chuck any constants appearing in time complexity because it is kinda insignificant.
+[14:49] <ishaan> okay! cool
+[14:49] <Ashwin> Ok
+[14:49] <@vilas_m> O(2N) is O(N). O(N + 5) is also O(N).
+[14:50] <@vilas_m> But, O(N^2) is not O(N). It is O(N^2) itself. Why? Significant difference in O(N) and O(N^2). If N = 10^8, O(N) algorithms will take a few seconds to compute. 
+[14:51] <Ashwin> So O(1000000N) is Also O(N).? 
+[14:51] <@vilas_m> But O(N^2) algorithms? 10^8 seconds. That's like a few months! 
+[14:51] <@vilas_m> Not exactly Ashwin :) That's one drawback of this notation. If the constants are huge, you cannot neglect the constants. 
+[14:52] <Ashwin> Ok
+[14:52] <@vilas_m> for(i=1; i<=N; i*= 2)
+[14:52] <@vilas_m> Can anybody tell me what is the complexity for the above code? ;)
+[14:53] <@vilas_m> Take N=64 says. And count the numbers of iterations
+[14:53] <Ashwin> O(N^2)?
+[14:53] <@vilas_m> No.. 
+[14:54] <@vilas_m> For N=64, can anybody trace the values of i in the iteration?
+[14:54] <@vilas_m> i = 1, 2, 4, 8, 16, 32, 64 and stops, right? 
+[14:55] <ishaan> yes
+[14:55] <Ashwin> Yes
+[14:55] <@vilas_m> That is 7 steps. So now can someone point out the complexity in terms of big-oh notation? :P 
+[14:55] <ishaan> so O(sqrt(N)-1)?
+[14:56] <@vilas_m> Haha, good guess ishaan. But no :P 
+[14:56] <ishaan> no. Sorry :P
+[14:56] <@vilas_m> What is 64? 2^6 right? 
+[14:56] <ishaan> yeah
+[14:56] <Ashwin> Yez
+[14:56] <@vilas_m> Does that give a clue? :P 
+[14:57] <@vilas_m> Ok, i ll give it away. It's O(log N)
+[14:57] <@vilas_m> I'll explain
+[14:57] <ishaan> Ohh! 
+[14:58] <@vilas_m> The variable i will have values as 1,2,4,... 2^(n-1), where n is the number of iterations. Correct? 
+[14:58] <ishaan> yes
+[14:58] <@vilas_m> Note that n is not equal to N. 
+[14:58] <@vilas_m> Should have used m or something. damn
+[14:58] <@vilas_m> So the for loop stops when 2^(n-1) <= N 
+[14:59] <@vilas_m> or i can 2^(n-1) is approximately N, yea? 
+[14:59] <ishaan> yeah
+[14:59] <@vilas_m> 2^(n-1) = N, implies n-1 = log N (to the base 2) 
+[14:59] <@vilas_m> So n = log N + 1
+[15:00] <@vilas_m> Hence, no. of iterations = log N + 1 
+[15:00] <@vilas_m> So we can tell the for loop runs in O(log N) 
+[15:00] <@vilas_m> Got it?
+[15:01] <ishaan> yes
+[15:01] <@vilas_m> Yup. That's it :) So that brings us to the end of today's session. 
+[15:01] <@vilas_m> Hope it was helpful guys. 
+[15:01] <@vilas_m> Please try out the problems posted on the groups now that you're ready :D
+[15:02] <ishaan> It was! I'll try the problems :)
+[15:02] <ishaan> Thank you for explaining stuff even though there weren't many of us here :D
+[15:03] <@vilas_m> Haha, that's fine :P We want only the enthusiastic people here ;)  
+[15:03] <ishaan> cool :)
