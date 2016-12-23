@@ -1,0 +1,224 @@
+Session Start: Fri Dec 23 12:52:02 2016
+Session Ident: #wcalgo4
+[13:22] <mukta> Today we will look into some concepts of graphs and the basic algorithms for graph traversal
+[13:23] <mukta> so, a graph is a network
+[13:23] <mukta> It consists of vertices or nodes and edges connecting the nodes.
+[13:23] <mukta> Say a graph consists of 5 nodes. 0,1,2,3,4
+[13:24] <mukta> a graph can be a directed graph or an undirected one.
+[13:24] <mukta> a path from a vertex u to vertex v is bidirectional incase of an undirected graph while it is unidirectional in case of a directed graph
+[13:25] <mukta> so e1(1,2) signifies an edge between vertex 1 and 2 in an undirected graph
+[13:25] <mukta> but e1(1,2) is a path from vertex 1 to 2 only incase of a directed graph but not from vertex 2 to 1
+[13:26] <mukta> get it?
+[13:26] <Sai_> Yes
+[13:27] <mukta> alright
+[13:27] <salman> Yup
+[13:27] <mukta> so now a graph is said to have cycle if there is a path in the graph which starts from a vertex and ends at the same vert
+[13:28] <mukta> like e1(0,1) e2(1,2) e3(2,0)
+[13:29] <mukta> whereas a tree is  a graph in which any two vertices are connected by only one path.
+[13:29] <mukta> It most problems, an edge also has a weight associated with it
+[13:31] <mukta> mostly in problems where you have to find the maximum or minimum cost to go to a particular vertex from a given vertex
+[13:31] <mukta> the given weight acts as the cost factor. There are similar other variations of use of the weights given to the edges
+[13:32] <mukta> so let us first look at how to traverse in a graph
+[13:32] <mukta> to traverse we should be first representing it 
+[13:33] <mukta> the easiest way being, take a two dimensional array N*N where N is the number of nodes in the graph 
+[13:34] <mukta> we initialise the matrix to 0
+[13:35] <mukta> Element M(i,j) is 1 if there is an edge from vertex i to vertex j else M(i,j) remains 0 in the matrix.
+[13:35] <mukta> The matrix can also be modified for the weighted graph if required
+[13:36] <mukta> in that case M(i,j)=weight of the edge
+[13:36] <mukta> This representation is called an adjacency matrix representation
+[13:36] <mukta> cool??
+[13:37] <salman> yes
+[13:37] <mukta> the other way is by using linked lists, called adjacency list
+[13:39] <mukta> here each node has a list. it contains all the nodes the particular node is connected to 
+[13:39] <mukta> consider a graph with nodes 1,2,3,4 
+[13:39] <Sai_> If I'm connect vertex 1 to 4... M[1][4]=1 or M[4][1]
+[13:40] <mukta> edges (1,2) (2,3) (3,4) (4,1) 
+[13:40] <mukta> can you tell the matrix and list representation
+[13:41] <mukta> @sai_ if there exits an edge from vertex 1 to vertex 4  in an undirected graph
+[13:41] <mukta> M[1,4]=M[4,1]=1
+[13:42] <Sai_> Okk
+[13:42] <mukta> but if it is directed 
+[13:42] <mukta> M[1,4]=1
+[13:42] <mukta> m[4,1]=0
+[13:42] <Sai_> Got it, thanks!
+[13:43] <salman> @mukta what was the question
+[13:43] <mukta> consider a graph with nodes 1,2,3,4
+[13:43] <mukta> edges (1,2) (2,3) (3,4) (4,1)
+[13:43] <mukta> tell the matrix and list representation
+[13:43] <salman> DId you mean this: M[1,2], M[2,3], M[3,4] and M[4,1]
+[13:43] <salman> Matrix representation
+[13:43] <salman> ??
+[13:43] <mukta> well yes
+[13:43] <salman> All those values should be equal to 1
+[13:43] <salman> **
+[13:44] <mukta> but you should always ask for whether it is directed or not
+[13:44] <salman> 1 -> 2 , 2-> 3, 3-> 4, 4 -> 1
+[13:44] <salman> Oh okay!
+[13:44] <salman> Is the list representation right?
+[13:44] <mukta> your answer is right if it is directed
+[13:45] <salman> Oh yeah wait
+[13:45] <mukta> what if it is undirected
+[13:45] <salman> 1 -> 2- > 4 ,  2 -> 3- > 1 , 3 -> 4 -> 2 , 4 -> 1 -> 3
+[13:45] <salman> How about this?
+[13:46] <mukta> yup!
+[13:46] <salman> Awesome :D
+[13:46] <mukta> so now let us look at graph traversals
+[13:47] <Sai_> I did not get the unidirectional part
+[13:47] <mukta> okay,see
+[13:47] <mukta> 1,2 is an edge
+[13:47] <mukta> 1,4 is also an edge
+[13:47] <mukta> as (1,4) is same as (4,1)
+[13:48] <mukta> coz the graph is undirected
+[13:48] <mukta> so in the list, node 1 is connected to 2 and 4
+[13:48] <mukta> get it @Sai_
+[13:48] <Sai_> Ohk
+[13:48] <Sai_> Yes, got it
+[13:49] <mukta> similarly for the other nodes
+[13:49] <mukta> okay so the first method is called BFS
+[13:49] <mukta> that is breadth first search
+[13:50] <mukta> in this method you traverse through the graph along it's breadth 
+[13:50] <mukta> take a graph : nodes 1,2,3,4,5
+[13:51] <mukta> edges 1-2, 1-3, 2-4, 2-5
+[13:51] <mukta> you have to travel through the graph starting from node 1
+[13:52] <mukta> what BFS does is, it first goes to all the immediate nodes connected to the first node or the root node or the source node
+[13:52] <mukta> in this case we are starting from 1
+[13:52] <mukta> so the source node is 1
+[13:53] <mukta> the immediate nodes are 2 and then 3
+[13:53] <mukta> so a FIFO queue is maintained 
+[13:54] <mukta> first element of the queue is the source node 1
+[13:54] <mukta> next you insert it's connected nodes 2 and 3
+[13:55] <mukta> once all immediate connected nodes of 1 are added to the queue,1 is dequeued
+[13:55] <mukta> understood till this point?
+[13:56] <mukta> salman,sai?
+[13:56] <Sai_> Yes
+[13:56] <mukta> so now you move to the next element in the queue that is 2. Add the nodes connected to 2 into the queue
+[13:57] <mukta> so you add nodes 4 and 5 to the queue
+[13:57] <salman> Yees
+[13:57] <mukta> the contents of the queue are 2,3,4,5
+[13:57] <mukta> as all nodes connected to 2 are added it is then dequeued
+[13:58] <mukta> next is 3
+[13:58] <mukta> node 3 is not connected to any new node
+[13:59] <mukta> It is connected to 1 but we have already seen node 1 and the corresponding edge 
+[13:59] <mukta> which means there is a necessity to have a structure that notes if a vertex has already been visited or not
+[14:00] <mukta> so we ammend the way we must enqueue vertices
+[14:01] <mukta> to enqueue a vertex, it must have an edge with the vertex in consideration and should not be previously visited
+[14:02] <mukta> thus in our graph, we do not add vertex 1 again to the queue
+[14:03] <mukta> next vertices 4 and 5 are visited and no new element is added to the queue and 4,5 are dequeued respectively
+[14:03] <mukta> the traversal ends when the queue becomes empty
+[14:03] <mukta> understood?
+[14:04] <Sai_> Yup
+[14:04] <salman> yess
+[14:06] <mukta> http://ideone.com/sVTgkr
+[14:07] <mukta> you can see the main function for BFS here
+[14:07] <mukta> can you tell me the time complexity if the graph is represented as a matrix and has V vertices and E edges
+[14:08] <salman> Btw how does it strike when to apply BFS and when to apply DFS for a particular question?
+[14:09] <mukta> well you will get the answer using both 
+[14:09] <mukta> the complexity that would be involved will differ
+[14:09] <mukta> do you know how DFS works?
+[14:10] <Sai_> Nope
+[14:10] <salman> Yea
+[14:10] <mukta> okay, complexity of BFS first 
+[14:11] <mukta> @salman, I will give you an example at the end of the session
+[14:12] <mukta> if it is an adjacency matrix, in order to check if a node x is connected to node y you have to traverse through the entire matrix
+[14:12] <mukta> this would happen for each vertex
+[14:12] <mukta> so complexity would be?
+[14:13] <salman> O(n^2)?
+[14:13] <mukta> yeah O(V^2) in standard notations
+[14:13] <mukta> graph is always (V,E) 
+[14:13] <mukta> vertices and edges
+[14:14] <salman> Oh okay
+[14:14] <mukta> so can you tell me what would be the difference if it is a list
+[14:15] <mukta> a list for a node will contain only nodes it is connected to unlike matrix
+[14:15] <mukta> any hint that you can take from this...?
+[14:16] <salman> O(1)
+[14:16] <Sai_> O(V)
+[14:16] <mukta> omg how?
+[14:16] <salman> O(v)
+[14:16] <salman> **
+[14:16] <salman> Sorry 
+[14:16] <salman> It would go directly to the list and queue all the elements in the list
+[14:17] <mukta> yes
+[14:17] <mukta> so that would happen for 1 node 
+[14:17] <mukta> for each node you will have to enqueue the unvisited,connected nodes
+[14:18] <mukta> so the total number of nodes in all the lists combined will be equal to the number of edges in the graph
+[14:19] <mukta> in case of an undirected graph, total number of nodes in all the lists combined is double the edges in the graph
+[14:19] <mukta> understanding?
+[14:19] <mukta> 1 -> 2- > 4 ,  2 -> 3- > 1 , 3 -> 4 -> 2 , 4 -> 1 -> 3
+[14:20] <salman> Yes
+[14:20] <mukta> the list you reprsented sometime ago @salman
+[14:20] <salman> Understood
+[14:20] <mukta> so then the complexity would be O(VE)
+[14:20] <mukta> v vertices, i.e v lists to go to
+[14:20] <salman> Oh okay :D
+[14:21] <mukta> and from all those v lists together E nodes
+[14:21] <mukta> Next we move onto DFS
+[14:21] <mukta> that is depth first search
+[14:21] <mukta> we will look at the recursive approach
+[14:22] <mukta> take the same graph as we considered for bfs
+[14:22] <mukta> now start from node 1
+[14:22] <mukta> we go to the first immediate connection of 1
+[14:22] <mukta> that is 2
+[14:23] <mukta> we then go to the first immediate connection of 2
+[14:23] <mukta> that is 4
+[14:23] <mukta> now 4 has no more connections 
+[14:23] <mukta> so we move back to 2
+[14:23] <mukta> we go to the next connection of 2..that's 5 
+[14:24] <mukta> again 5 has nothing more next 
+[14:24] <mukta> so return to 2
+[14:24] <mukta>  has no other connection left
+[14:24] <mukta> so return to 1
+[14:24] <mukta> the next connection of 1 is 3
+[14:24] <mukta> so now, we move to 3
+[14:25] <mukta> here we move along the depth of the graph 
+[14:25] <mukta> hence DFS
+[14:25] <mukta> understood?
+[14:25] <Sai_> Yes
+[14:25] <salman> yea
+[14:26] <mukta> http://ideone.com/NTo4Sb
+[14:26] <mukta> DFS recursion function
+[14:27] <mukta> any try on the complexity here?
+[14:27] <mukta> Would it be any different?
+[14:28] <Sai_> I think O(VE)
+[14:28] <mukta> in list or matrix or both?
+[14:29] <Sai_> Matrix
+[14:29] <mukta> not really
+[14:29] <Sai_> O
+[14:29] <salman> O(V*V) for matrix?
+[14:30] <mukta> in a matrix also, you will have to go through the entire matrix for checking the next connected node i.e an edge
+[14:30] <mukta> that's right @ salman
+[14:30] <Sai_> Okk
+[14:30] <mukta> complexities remain same
+[14:30] <salman> And O(V*E) for LIST
+[14:31] <mukta> alright...
+[14:31] <mukta> so that's all about graphs today
+[14:31] <mukta> @salman about you question
+[14:31] <mukta> regarding BFS or DFS
+[14:31] <mukta> take a question
+[14:32] <mukta> find if there is a cycle in the graph
+[14:32] <mukta> can you tell me the logic to do so
+[14:32] <salman> Umm wait
+[14:33] <salman> Iterate through all the vertices and mark visited as u go along
+[14:33] <salman> If you come back to a vertex that has already been marked vistied it is a cycle
+[14:34] <mukta> well not really
+[14:34] <salman> Umm then how?
+[14:35] <mukta> umm sorry
+[14:35] <mukta> i read it wrong
+[14:36] <mukta> but you should be careful about which marked node you are revisiting
+[14:36] <mukta> like in the graph we considered today
+[14:36] <mukta> 1-2 1-3 2-4 2-5
+[14:36] <mukta> when you go to 3 1 is marked
+[14:36] <mukta> but that doesn't mean a cycle
+[14:37] <salman> Oh yeah so look for adjacent vertices when you land on a vertex?
+[14:37] <salman> ANd then check for visited condition?
+[14:37] <salman> Adjacent = Connected **
+[14:37] <mukta> uhh you can say that
+[14:37] <mukta> but ideally
+[14:37] <salman> Or ..??
+[14:37] <mukta> go for dfs
+[14:37] <salman> Oh okay
+[14:38] <mukta> if you come across a node from which you have built for further recursion...it's a cycle
+[14:39] <mukta> bfs will solve but will be more tedious
+[14:39] <mukta> implement the algorithms,you will get an idea of which one to use when 
+[14:40] <salman> Sure I'll try
+[14:40] <salman> Could you send a list?
+[14:42] <salman> Thanks for today :D
